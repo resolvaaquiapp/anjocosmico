@@ -14,35 +14,6 @@ const dadosSignos = {
     "Peixes": { elemento: "Água 💧", regente: "Netuno 🌊" }
 };
 
-const anjosGuardioes = [
-    { nome: "Vehuiah", mantra: "Eu sou a força divina que rompe as barreiras do medo. Diante dos desafios da vida, eu me transformo, descubro meu poder oculto e renasço muito mais forte, guiado pela luz eterna.", bencao: "Concede uma coragem invencível e uma força espiritual extraordinária para iniciar projetos grandiosos, vencer crises severas e iluminar caminhos que antes pareciam completamente escuros." },
-    { nome: "Jeliel", mantra: "A harmonia universal habita o centro do meu coração. Eu sou um farol de pacificação, e a minha presença acalma as tempestades e estabelece a ordem onde houver caos.", bencao: "Traz paz absoluta ao ambiente familiar, sela a fidelidade eterna entre aqueles que se amam e derrama uma energia de conciliação que ajuda a resolver disputas e desentendimentos complexos." },
-    { nome: "Sitael", mantra: "Eu sou o arquiteto soberano da minha própria história. Sob o manto protetor das milícias celestes, nenhum obstáculo terreno é capaz de desviar os meus passos do sucesso.", bencao: "Atua como um escudo divino contra grandes adversidades, protege a integridade física e espiritual e concede a virtude da honra, ajudando a cumprir promessas e atrair a verdade." },
-    { nome: "Elemiah", mantra: "O passado passou; eu liberto as velhas amarras e sigo leve, confiante e soberano em direção à minha evolução espiritual e prosperidade.", bencao: "Afasta a angústia da alma e a incerteza do futuro. Abre portas de ouro para novos caminhos profissionais e revela os segredos para transformar crises em grandes vitórias." },
-    { nome: "Mahasiah", mantra: "A sabedoria infinita do universo flui através das minhas escolhas. Minha mente é um templo de luz, clareza e discernimento para compreender os mistérios do mundo.", bencao: "Facilita o aprendizado de grandes artes, ciências e estudos elevados. Derrama uma profunda paz de espírito na mente do protegido, limpando pensamentos negativos e ansiedades." },
-    { nome: "Lelahel", mantra: "A luz milagrosa da cura, do amor e da inspiração divina brilha intensamente através de mim, tocando a vida de todos que cruzam a minha jornada.", bencao: "Traz uma poderosa energia de cura física e espiritual. Atrai inspiração artística, reconhecimento honesto nos negócios e magnetismo pessoal para atrair a felicidade e o amor verdadeiro." },
-    { nome: "Achaiah", mantra: "Eu contemplo o universo com a paciência dos anjos. Na quietude da minha alma, eu descubro as respostas mais profundas e os segredos ocultos da criação.", bencao: "Multiplica a paciência nas horas difíceis, expande a inteligência prática e ajuda a desvendar mistérios complexos da natureza e do trabalho, transformando tarefas difíceis em sucesso absoluto." },
-    { nome: "Cahetel", mantra: "Eu sinto e agradeço pela imensa abundância cósmica que a terra e o céu derramam diariamente sobre a minha vida, meu lar e meu trabalho.", bencao: "Atrai a fartura material, o sucesso estrondoso em negócios e plantações. Cria uma barreira celestial intransponível que afasta energias densas, inveja e feitiçarias da sua vida." },
-    { nome: "Haziel", mantra: "A misericórdia do Criador me envolve como um manto sagrado. Eu aprendo a perdoar o passado e permito que o amor incondicional guie minhas relações.", bencao: "Atrai a promessa de amizades leais e sinceras, abre as portas para o favor e apoio de pessoas influentes e concede a graça do perdão para libertar o coração de velhas mágoas." },
-    { nome: "Aladiah", mantra: "Minhas feridas antigas se fecham agora. Meu espírito se renova por completo na fonte da juventude cósmica, pronto para uma nova história de triunfo.", bencao: "Traz regeneração total da saúde e restauração da boa reputação. Ajuda a superar erros cometidos no passado e transforma trajetórias difíceis em grandes exemplos de superação." },
-    { nome: "Laoviah", mantra: "A minha verdadeira vitória consiste no equilíbrio inabalável da minha alma. Eu sou protegido contra as ilusões do mundo e sigo firme na luz.", bencao: "Protege o indivíduo contra fraudes, mentiras e falsidades intelectuais. Concede um talento natural brilhante que traz renome, sucesso e reconhecimento público merecido." },
-    { nome: "Hahahiah", mantra: "O meu coração é um santuário de paz mística, totalmente inacessível às forças do mal. Eu caminho sob a guarda dos sentinelas celestes.", bencao: "Atua como um escudo supremo contra a falsidade e a traição. Revela grandes mistérios do destino e conselhos valiosos através de sonhos lúcidos e intuições certeiras." },
-    { nome: "Caliel", mantra: "Minha mente é justiça, reta e iluminada pela verdade inabalável. Eu reconheço a justiça divina em todas as coisas e sou amparado por ela.", bencao: "Fornece socorro espiritual ultra rápido diante de problemas jurídicos ou burocráticos. Ajuda a reconhecer a verdade imediatamente e confunde os inimigos que tentam prejudicar o protegido." }
-];
-
-// Preenche a lista de dias (1 a 31) ao iniciar a página
-window.onload = function() {
-    const selectDia = document.getElementById("dia");
-    if (selectDia) {
-        for (let i = 1; i <= 31; i++) {
-            let opt = document.createElement("option");
-            opt.value = i;
-            opt.innerHTML = i;
-            selectDia.appendChild(opt);
-        }
-    }
-};
-
 // BANCO DE DADOS DOS ANJOS
 const tabelaAnjos = [
   { inicio: "03-20", fim: "03-24", 
@@ -84,6 +55,19 @@ const datasGenios = [
   "03-19", "05-31", "08-12", 
   "10-24", "01-05"
 ];
+
+// Preenche a lista de dias (1 a 31) ao iniciar a página
+window.onload = function() {
+    const selectDia = document.getElementById("dia");
+    if (selectDia) {
+        for (let i = 1; i <= 31; i++) {
+            let opt = document.createElement("option");
+            opt.value = i;
+            opt.innerHTML = i;
+            selectDia.appendChild(opt);
+        }
+    }
+};
 
 }
 
