@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anjo Cósmico 🌌</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        body { 
+            background: linear-gradient(rgba(15, 12, 27, 0.8), rgba(15, 12, 27, 0.8)), url('logo.png'), url('logo.png.jpg'), url('logo.png.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-color: #0f0c1b;
+            color: #fff; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 20px; 
+        }
+        
+        .container { 
+            background: rgba(20, 16, 38, 0.75); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(229, 193, 88, 0.25); 
+            padding: 30px; 
+            border-radius: 20px; 
+            width: 100%; 
+            max-width: 480px; 
+            text-align: center; 
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.7); 
+        }
+        
+        .logo-site { width: 100%; max-width: 340px; height: auto; margin-bottom: 10px; border-radius: 12px; }
+        
+        p.subtitulo { 
+            font-size: 1rem; 
+            color: #e5c158; 
+            margin-bottom: 25px; 
+            font-weight: 600; 
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
+            letter-spacing: 0.5px;
+        }
+        
+        .form-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: #f1f2f6; font-weight: 500; }
+        
+        input[type="text"], select { width: 100%; padding: 12px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; background: rgba(15, 12, 27, 0.85); color: #fff; font-size: 1rem; outline: none; transition: 0.3s; }
+        input[type="text"]:focus, select:focus { border-color: #e5c158; box-shadow: 0 0 10px rgba(229, 193, 88, 0.4); }
+        
+        .data-container { display: flex; gap: 15px; }
+        .data-container .form-group { flex: 1; margin-bottom: 0; }
+        
+        button.btn-principal { width: 100%; padding: 14px; background: linear-gradient(90deg, #5f27cd, #e5c158); background-size: 200% auto; border: none; border-radius: 8px; color: white; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.4s; margin-top: 25px; box-shadow: 0 4px 15px rgba(95, 39, 205, 0.4); }
+        button.btn-principal:hover { background-position: right center; transform: translateY(-2px); }
+        
+        #resultado { margin-top: 25px; padding: 20px; border-radius: 12px; background: rgba(15, 12, 27, 0.9); border: 1px solid rgba(229, 193, 88, 0.3); border-left: 4px solid #e5c158; display: none; text-align: left; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        #resultado h3 { font-size: 1.1rem; color: #e5c158; margin-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 5px; }
+        .info-linha { margin-bottom: 8px; font-size: 0.95rem; color: #dfe6e9; }
+        .info-linha strong { color: #fff; }
+        .destaque-astral { color: #00cec9 !important; font-weight: bold; }
+        .destaque-anjo { color: #ffeaa7 !important; font-weight: bold; }
+        .significado { font-size: 0.85rem; color: #b2bec3; font-style: italic; margin-top: 4px; padding-left: 10px; border-left: 2px solid #e5c158; }
+        
+        /* CONTAINER DOS BOTÕES DE PAGAMENTO */
+        .opcoes-pagamento { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+        
+        /* Base de estilo para todos os botões de vendas */
+        .btn-venda { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 14px; color: #fff; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: bold; text-decoration: none; transition: 0.3s; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .btn-venda:hover { transform: scale(1.02); filter: brightness(1.1); }
+        
+        /* 1. Botão Verde (Básico - R$ 5,00) */
+        .btn-basico { background-color: #25d366; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2); }
+        
+        /* 2. Botão Prata/Roxo Brilhante (VIP - R$ 19,90) */
+        .btn-vip { background: linear-gradient(135deg, #a29bfe, #6c5ce7); box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3); border: 1px solid rgba(255,255,255,0.2); }
+        
+        /* 3. Botão Dourado Reluzente (Premium - R$ 49,90) */
+        .btn-premium { background: linear-gradient(135deg, #f1c40f, #d4af37); color: #151026 !important; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Logomarca Anjo Cósmico" class="logo-site" onerror="this.src='logo.png.jpg'; this.onerror=function(){this.src='logo.png.png';}">
+        <p class="subtitulo">Descubra sua assinatura astrológica e seu Anjo Guardião</p>
+        
+        <div class="form-group">
+            <label for="nome">Seu Nome:</label>
+            <input type="text" id="nome" placeholder="Digite seu nome ou apelido">
+        </div>
+        <div class="data-container">
+            <div class="form-group">
+                <label for="dia">Dia:</label>
+                <select id="dia"></select>
+            </div>
+            <div class="form-group">
+                <label for="mes">Mês:</label>
+                <select id="mes">
+                    <option value="1">Janeiro</option>
+                    <option value="2">Fevereiro</option>
+                    <option value="3">Março</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Maio</option>
+                    <option value="6">Junho</option>
+                    <option value="7">Julho</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-principal" onclick="descobrirPerfil()">Revelar Mapa Astral</button>
+        <div id="resultado"></div>
+    </div>
+    <script src="script.js"></script>
+    <script src="script"></script>
+</body>
+</html>
