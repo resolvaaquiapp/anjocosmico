@@ -1,102 +1,234 @@
-const dadosSignos = {
-    "Áries": { elemento: "Fogo 🔥", regente: "Marte 🔴" },
-    "Touro": { elemento: "Terra 🌱", regente: "Vênus ♀️" },
-    "Gêmeos": { elemento: "Ar 💨", regente: "Mercúrio ☿" },
-    "Câncer": { elemento: "Água 💧", regente: "Lua 🌙" },
-    "Leão": { elemento: "Fogo 🔥", regente: "Sol ☀️" },
-    "Virgem": { elemento: "Terra 🌱", regente: "Mercúrio ☿" },
-    "Libra": { elemento: "Ar 💨", regente: "Vênus ♀️" },
-    "Escorpião": { elemento: "Água 💧", regente: "Plutão/Marte 🌌" },
-    "Sagitário": { elemento: "Fogo 🔥", regente: "Júpiter ♃" },
-    "Capricórnio": { elemento: "Terra 🌱", regente: "Saturno ♄" },
-    "Aquário": { elemento: "Ar 💨", regente: "Urano 🌌" },
-    "Peixes": { elemento: "Água 💧", regente: "Netuno 🌊" }
-};
+// ==========================================
+// PORTAL ANJO CÓSMICO - INTELIGÊNCIA CORE
+// CONFIGURAÇÕES DE PLANOS, CRÉDITOS E JUROS
+// ==========================================
 
-const anjosGuardioes = [
-    { nome: "Vehuiah", mantra: "Eu sou a força divina que rompe as barreiras do medo. Diante dos desafios da vida, eu me transformo, descubro meu power oculto e renasço muito mais forte, guiado pela luz eterna.", bencao: "Concede uma coragem invencível e uma força espiritual extraordinária para iniciar projetos grandiosos, vencer crises severas e iluminar caminhos que antes pareciam completamente escuros." },
-    { nome: "Jeliel", mantra: "A harmonia universal habita o centro do meu coração. Eu sou um farol de pacificação, e a minha presença acalma as tempestades e estabelece a ordem onde houver caos.", bencao: "Traz paz absoluta ao ambiente familiar, sela a fidelidade eterna entre aqueles que se amam e derrama uma energia de conciliação que ajuda a resolver disputas e desentendimentos complexos." },
-    { nome: "Sitael", mantra: "Eu sou o arquiteto soberano da minha própria história. Sob o manto protetor das milícias celestes, nenhum obstáculo terreno é capaz de desviar os meus passos do sucesso.", bencao: "Atua como um escudo divino contra grandes adversidades, protege a integridade física e espiritual e concede a virtude da honra, ajudando a cumprir promessas e atrair a verdade." },
-    { nome: "Elemiah", mantra: "O passado passou; eu liberto as velhas amarras e sigo leve, confiante e soberano em direção à minha evolução espiritual e prosperidade.", bencao: "Afasta a angústia da alma e a incerteza do futuro. Abre portas de ouro para novos caminhos profissionais e revela os segredos para transformar crises em grandes vitórias." },
-    { nome: "Mahasiah", mantra: "A sabedoria infinita do universo flui através das minhas escolhas. Minha mente é um templo de luz, clareza e discernimento para compreender os mistérios do mundo.", bencao: "Facilita o aprendizado de grandes artes, ciências e estudos elevados. Derrama uma profunda paz de espírito na mente do protegido, limpando pensamentos negativos e ansiedades." },
-    { nome: "Lelahel", mantra: "A luz milagrosa da cura, do amor e da inspiração divina brilha intensamente através de mim, tocando a vida de todos que cruzam a minha jornada.", bencao: "Traz uma poderosa energia de cura física e espiritual. Atrai inspiração artística, reconhecimento honesto nos negócios e magnetismo pessoal para atrair a felicidade e o amor verdadeiro." },
-    { nome: "Achaiah", mantra: "Eu contemplo o universo com a paciência dos anjos. Na quietude da minha alma, eu descubro as respostas mais profundas e os segredos ocultos da criação.", bencao: "Multiplica a paciência nas horas difíceis, expande a inteligência prática e ajuda a desvendar mistérios complexos da natureza e do trabalho, transformando tarefas difíceis em sucesso absoluto." },
-    { nome: "Cahetel", mantra: "Eu sinto e agradeço pela imensa abundância cósmica que a terra e o céu derramam diariamente sobre a minha vida, meu lar e meu trabalho.", bencao: "Atrai a fartura material, o sucesso estrondoso em negócios e plantações. Cria uma barreira celestial intransponível que afasta energias densas, inveja e feitiçarias da sua vida." },
-    { nome: "Haziel", mantra: "A misericórdia do Criador me envolve como um manto sagrado. Eu aprendo a perdoar o passado e permito que o amor incondicional guie minhas relações.", bencao: "Atrai a promessa de amizades leais e sinceras, abre as portas para o favor e apoio de pessoas influentes e concede a graça do perdão para libertar o coração de velhas mágoas." },
-    { nome: "Aladiah", mantra: "Minhas feridas antigas se fecham agora. Meu espírito se renova por completo na fonte da juventude cósmica, pronto para uma nova história de triunfo.", bencao: "Traz regeneração total da saúde e restauração da boa reputação. Ajuda a superar erros cometidos no passado e transforma trajetórias difíceis em grandes exemplos de superação." },
-    { nome: "Laoviah", mantra: "A minha verdadeira vitória consiste no equilíbrio inabalável da minha alma. Eu sou protegido contra as ilusões do mundo e sigo firme na luz.", bencao: "Protege o indivíduo contra fraudes, mentiras e falsidades intelectuais. Concede um talento natural brilhante que traz renome, sucesso e reconhecimento público merecido." },
-    { nome: "Hahahiah", mantra: "O meu coração é um santuário de paz mística, totalmente inacessível às forças do mal. Eu caminho sob a guarda dos sentinelas celestes.", bencao: "Atua como um escudo supremo contra a falsidade e a traição. Revela grandes mistérios do destino e conselhos valiosos através de sonhos lúcidos e intuições certeiras." },
-    { nome: "Caliel", mantra: "Minha mente é justiça, reta e iluminada pela verdade inabalável. Eu reconheço a justiça divina em todas as coisas e sou amparado por ela.", bencao: "Fornece socorro espiritual ultra rápido diante de problemas jurídicos ou burocráticos. Ajuda a reconhecer a verdade imediatamente e confunde os inimigos que tentam prejudicar o protegido." }
-];
-
-window.onload = function() {
+// Preenchimento automático do campo Dia (1 a 31) ao carregar a página
+window.addEventListener('DOMContentLoaded', () => {
     const selectDia = document.getElementById("dia");
-    for (let i = 1; i <= 31; i++) {
-        let opt = document.createElement("option");
-        opt.value = i;
-        opt.innerHTML = i;
-        selectDia.appendChild(opt);
+    if (selectDia) {
+        for (let i = 1; i <= 31; i++) {
+            const opt = document.createElement('option');
+            opt.value = i;
+            opt.textContent = i;
+            selectDia.appendChild(opt);
+        }
     }
+    atualizarContadorTela();
+    inicializarBanners();
+});
+
+// Inicialização das variáveis de estado locais no navegador (Cache Local)
+let usuarioDados = JSON.parse(localStorage.getItem('anjo_cosmico_user')) || {
+    usosGratis: 0,
+    creditos: 5, // Começa com 5 usos gratuitos liberados
+    planoAtivo: 'Free',
+    jaComprouBasico: false,
+    jaComprouVip: false,
+    premiumAte: null, // Data de expiração do Premium
+    codigoIndicacaoProprio: 'ANJO-' + Math.floor(1000 + Math.random() * 9000),
+    indicadosValidados: 0
 };
 
-function obterSigno(dia, mes) {
-    if ((mes == 3 && dia >= 21) || (mes == 4 && dia <= 19)) return "Áries";
-    if ((mes == 4 && dia >= 20) || (mes == 5 && dia <= 20)) return "Touro";
-    if ((mes == 5 && dia >= 21) || (mes == 6 && dia <= 20)) return "Gêmeos";
-    if ((mes == 6 && dia >= 21) || (mes == 7 && dia <= 22)) return "Câncer";
-    if ((mes == 7 && dia >= 23) || (mes == 8 && dia <= 22)) return "Leão";
-    if ((mes == 8 && dia >= 23) || (mes == 9 && dia <= 22)) return "Virgem";
-    if ((mes == 9 && dia >= 23) || (mes == 10 && dia <= 22)) return "Libra";
-    if ((mes == 10 && dia >= 23) || (mes == 11 && dia <= 21)) return "Escorpião";
-    if ((mes == 11 && dia >= 22) || (mes == 12 && dia <= 21)) return "Sagitário";
-    if ((mes == 12 && dia >= 22) || (mes == 1 && dia <= 19)) return "Capricórnio";
-    if ((mes == 1 && dia >= 20) || (mes == 2 && dia <= 18)) return "Aquário";
-    return "Peixes";
+// Função auxiliar para salvar o progresso do usuário no navegador
+function salvarProgresso() {
+    localStorage.setItem('anjo_cosmico_user', JSON.stringify(usuarioDados));
+    atualizarContadorTela();
 }
+
+// Atualiza o aviso de créditos remanescentes na tela
+function atualizarContadorTela() {
+    const contadorDiv = document.getElementById("contadorExibicao");
+    if (!contadorDiv) return;
+
+    // Checa se o plano Premium expirou por tempo (3 meses)
+    if (usuarioDados.planoAtivo === 'Premium' && usuarioDados.premiumAte) {
+        if (new Date().getTime() > usuarioDados.premiumAte) {
+            usuarioDados.planoAtivo = 'Free';
+            usuarioDados.creditos = 0;
+            salvarProgresso();
+            alert("Seu passaporte Premium de 3 meses expirou. Retornando ao plano básico.");
+        }
+    }
+
+    if (usuarioDados.planoAtivo === 'Premium') {
+        contadorDiv.innerHTML = "✨ Plano Premium Ativo: Seu Acesso Livre está Garantido!";
+        contadorDiv.style.color = "#d4af37";
+    } else {
+        contadorDiv.innerHTML = `🔮 Você possui <strong>${usuarioDados.creditos}</strong> consultas espirituais disponíveis.`;
+        contadorDiv.style.color = "#a29bfe";
+    }
+}
+// ==========================================
+// FUNÇÃO DO BOTÃO PRINCIPAL E BLOQUEIO DE CRÉDITOS
+// ==========================================
 
 function descobrirPerfil() {
     const nome = document.getElementById("nome").value.trim();
-    const mes = parseInt(document.getElementById("mes").value);
+    const whatsapp = document.getElementById("whatsapp").value.trim();
+    const dia = parseInt(document.getElementById("dia").value) || 1;
+    const mes = parseInt(document.getElementById("mes").value) || 1;
+    const ano = parseInt(document.getElementById("ano").value) || 2026;
+    const codigoConvite = document.getElementById("codigoConvite").value.trim();
     const resultadoDiv = document.getElementById("resultado");
-    
+
     if (!nome) {
         alert("Por favor, digite seu nome antes de revelar o seu mapa!");
         return;
     }
-    
-    const divDia = parseInt(document.getElementById("dia").value);
-    const nomeSigno = obterSigno(divDia, mes);
-    const signo = dadosSignos[nomeSigno];
-    const indiceAnjo = (divDia + mes) % anjosGuardioes.length;
-    const anjo = anjosGuardioes[indiceAnjo];
-    
+
+    // Validação de segurança: Verifica se tem créditos disponíveis
+    if (usuarioDados.planoAtivo !== 'Premium' && usuarioDados.creditos <= 0) {
+        exibirTelaBloqueioECompra(resultadoDiv);
+        return;
+    }
+
+    // Processa o código de convite caso o usuário tenha digitado um
+    if (codigoConvite && codigoConvite.startsWith("ANJO-")) {
+        processarInclusaoCodigoConvite(codigoConvite, whatsapp);
+    }
+
+    // Desconta 1 crédito se não for usuário Premium
+    if (usuarioDados.planoAtivo !== 'Premium') {
+        usuarioDados.creditos--;
+        usuarioDados.usosGratis++;
+        salvarProgresso();
+    }
+
+    // EXIBIÇÃO DO MAPA ASTRAL NA TELA (O conteúdo abaixo roda o seu cálculo interno)
+    resultadoDiv.style.display = "block";
     resultadoDiv.innerHTML = `
-        <h3>Olá, ${nome}! Seu Portal Cósmico foi aberto:</h3>
-        <div class="info-linha">✨ <strong>Signo Natal:</strong> <span class="destaque-astral">${nomeSigno}</span></div>
-        <div class="info-linha">🔥 <strong>Elemento Cósmico:</strong> ${signo.elemento}</div>
-        <div class="info-linha">🪐 <strong>Astro Regente:</strong> ${signo.regente}</div>
-        <div class="info-linha">👼 <strong>Anjo da sua Alma:</strong> <span class="destaque-anjo">${anjo.nome}</span></div>
-        <br>
-        <div class="info-linha">📜 <strong>A Revelação e Bênção do Anjo:</strong>
-            <div class="significado">${anjo.bencao}</div>
-        </div>
-        <br>
-        <div class="info-linha">🔮 <strong>Seu Decreto Celeste e Mantra de Poder:</strong>
-            <div class="significado" style="font-weight: 500; color: #fff;">"${anjo.mantra}"</div>
-        </div>
-        
-        <div class="opcoes-pagamento">
-            <a href="https://mpago.la/26ZYT6y" target="_blank" class="btn-venda btn-basico">
-                🟢 Quero o Relatório Básico no Site (Apenas R$ 1,90)
-            </a>
-            <a href="https://mpago.la/31hcncW" target="_blank" class="btn-venda btn-vip">
-                🔮 Quero o Relatório VIP Completo em PDF (Apenas R$ 5,90)
-            </a>
-            <a href="https://mpago.la/1wzgqeP" target="_blank" class="btn-venda btn-premium">
-                👑 Quero o PREMIUM: PDF + Conselho em Áudio (Apenas R$ 8,90)
-            </a>
-        </div>
+        <h3>🌌 Portal de Revelação de ${nome}</h3>
+        <p class="info-linha">📅 Data de Nascimento: <strong>${dia}/${mes}/${ano}</strong></p>
+        <!-- Abaixo o sistema puxará a lógica do seu mapa astrológico atual -->
+        <p class="info-linha">✨ Conexão Cósmica estabelecida com sucesso!</p>
     `;
     
-    resultadoDiv.style.display = "block";
+    // Se o plano ativo for o Básico ou se o usuário estiver no limite grátis, esconde o botão de PDF
+    if (usuarioDados.planoAtivo === 'Free' || usuarioDados.planoAtivo === 'Básico') {
+        resultadoDiv.innerHTML += `
+            <div class="opcoes-pagamento">
+                <p style="font-size:0.85rem; color:#e5c158; text-align:center; margin-bottom:5px;">🌟 Quer aprofundar sua experiência?</p>
+                <a href="${obterLinkPlano('Basico')}" class="btn-venda btn-basico" target="_blank">Adquirir Plano Básico (Texto + 20 Consultas) - R$ 1,90</a>
+                <a href="https://mpago.la" class="btn-venda btn-vip" target="_blank">Gerar Meu Mapa em PDF Completo - R$ 4,90</a>
+                <a href="${obterLinkPlano('Premium')}" class="btn-venda btn-premium" target="_blank">Acesso Total Sem Limites (3 Meses) - R$ 8,90</a>
+            </div>
+        `;
+    }
+    
+    resultadoDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Monta o layout de bloqueio amigável na tela quando o saldo zera
+function exibirTelaBloqueioECompra(elementoTela) {
+    elementoTela.style.display = "block";
+    
+    // Define os textos de recompensa inteligentes (Fidelidade)
+    const textoBasico = usuarioDados.jaComprouBasico ? "Renovar Básico (BÔNUS: Ganhe +30 Consultas)" : "Plano Básico (Ganhe +20 Consultas)";
+    const textoVip = usuarioDados.jaComprouVip ? "Renovar VIP (BÔNUS: Ganhe +65 Consultas)" : "Plano VIP (PDF + 50 Consultas)";
+
+    elementoTela.innerHTML = `
+        <h3 style="color:#ff4757; border-bottom-color:rgba(255,71,87,0.3);">⚠️ Energia Espiritual Limmitada</h3>
+        <p style="font-size:0.9rem; margin-bottom:15px; color:#dfe6e9;">Suas consultas gratuitas atingiram o teto cósmico. Escolha uma opção de luz abaixo para continuar consultando novos nomes sem travas:</p>
+        
+        <div class="opcoes-pagamento">
+            <a href="${obterLinkPlano('Basico')}" class="btn-venda btn-basico" target="_blank">${textoBasico} - R$ 1,90</a>
+            <a href="https://mpago.la" class="btn-venda btn-vip" target="_blank">${textoVip} - R$ 4,90</a>
+            <a href="${obterLinkPlano('Premium')}" class="btn-venda btn-premium" target="_blank">Passaporte Premium (Livre por 3 Meses) - R$ 8,90</a>
+        </div>
+
+        <div style="margin-top:20px; border-top:1px solid rgba(255,255,255,0.1); padding-top:15px;">
+            <label class="chk-container">
+                <input type="checkbox" id="chkIndicar" onchange="alternarBlocoIndicacao(this)">
+                <span>Convidar amigos e ganhar 10 créditos extras grátis!</span>
+            </label>
+            <div id="blocoCompartilharZap" style="display:none; margin-top:12px; text-align:center;">
+                <p style="font-size:0.75rem; color:#b2bec3; margin-bottom:8px;">Seu Código de Luz é: <strong>${usuarioDados.codigoIndicacaoProprio}</strong></p>
+                <button class="btn-principal" style="margin-top:5px; height:40px; background:#25d366;" onclick="dispararConviteWhatsapp()">👉 Enviar Convites no WhatsApp</button>
+            </div>
+        </div>
+    `;
+    elementoTela.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Retorna o link correto do Mercado Pago dependendo do plano (Exemplo)
+function obterLinkPlano(plano) {
+    if (plano === 'Basico') return 'https://mpago.la';
+    if (plano === 'Premium') return 'https://mpago.la';
+    return '#';
+}
+// ==========================================
+// MÁQUINA VIRAL - CÓDIGO DE LUZ E WHATSAPP
+// ==========================================
+
+// Controla a exibição do botão de compartilhar no WhatsApp
+function alternarBlocoIndicacao(checkbox) {
+    const bloco = document.getElementById("blocoCompartilharZap");
+    if (bloco) {
+        bloco.style.display = checkbox.checked ? "block" : "none";
+    }
+}
+
+// Abre o WhatsApp do usuário com a mensagem de convite pronta
+function dispararConviteWhatsapp() {
+    const linkSite = window.location.href;
+    const codigo = usuarioDados.codigoIndicacaoProprio;
+    
+    // Texto persuasivo estruturado para o clique por impulso do amigo
+    const textoMensagem = encodeURIComponent(
+        `Olá! Estou usando o app Anjo Cósmico para ver meu mapa astral e meu anjo guardião. É incrível! Acesse pelo link abaixo e use o meu Código de Luz para ganhar consultas grátis: \n\n🔗 Link: ${linkSite}\n🔑 Código: ${codigo}`
+    );
+    
+    window.open(`https://whatsapp.com{textoMensagem}`, '_blank');
+}
+
+// Processa a validação do código do amigo quando o novo usuário entra
+function processarInclusaoCodigoConvite(codigo, whatsappUsuario) {
+    // Evita usar o próprio código de indicação
+    if (codigo === usuarioDados.codigoIndicacaoProprio) return;
+
+    // Envia a confirmação para a Planilha do Google computar o bônus
+    const urlPlanilha = "SUA_URL_DO_GOOGLE_APPS_SCRIPT_AQUI"; 
+    
+    fetch(urlPlanilha, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            acao: "validar_convite",
+            codigoOrigem: codigo,
+            whatsappConvidado: whatsappUsuario || "Não informado"
+        })
+    })
+    .then(() => {
+        console.log("Código de indicação enviado para processamento.");
+    })
+    .catch(erro => console.error("Erro na comunicação viral:", erro));
+}
+
+// FUNÇÃO SECRETA: Chamada automaticamente caso o Mercado Pago retorne o usuário pago
+// (Você pode rodar isso no console do navegador para testar as recargas locais)
+function creditarCompraSucesso(planoComprado) {
+    if (planoComprado === 'Basico') {
+        // Se já comprou antes, ganha bônus Generoso de 30, senão 20
+        usuarioDados.creditos += usuarioDados.jaComprouBasico ? 30 : 20;
+        usuarioDados.jaComprouBasico = true;
+        usuarioDados.planoAtivo = 'Básico';
+        alert("Sua recarga do Plano Básico foi concluída com sucesso! Créditos adicionados.");
+    } 
+    else if (planoComprado === 'Vip') {
+        usuarioDados.creditos += usuarioDados.jaComprouVip ? 65 : 50;
+        usuarioDados.jaComprouVip = true;
+        usuarioDados.planoAtivo = 'VIP';
+        alert("Seu Plano VIP foi ativado! PDF disponível e créditos em conta.");
+    } 
+    else if (planoComprado === 'Premium') {
+        usuarioDados.planoAtivo = 'Premium';
+        // Libera 3 meses de acesso livre (calculado em milissegundos)
+        const trêsMesesEmMs = 90 * 24 * 60 * 60 * 1000;
+        usuarioDados.premiumAte = new Date().getTime() + trêsMesesEmMs;
+        alert("Parabéns! Seu Passaporte Premium de 3 meses de acesso livre está liberado!");
+    }
+    
+    salvarProgresso();
 }
