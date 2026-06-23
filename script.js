@@ -232,3 +232,125 @@ function creditarCompraSucesso(planoComprado) {
     
     salvarProgresso();
 }
+// ==========================================
+// AUTOMAÇÃO DOS BANNERS ROTATIVOS (SaaS)
+// ==========================================
+
+// Lista temporária de anunciantes (padrão) caso a planilha esteja vazia no início
+let listaAnunciantes = [
+    { nome: "Anjo Cósmico Portal", img: "https://placeholder.com", link: "#" }
+];
+
+let indiceBannerTopo = 0;
+let indiceBannerRodape = 0;
+const URL_PLANILHA_ANUNCIOS = "SUA_URL_DO_GOOGLE_APPS_SCRIPT_AQUI";
+
+// Puxa os anúncios ativos direto da sua planilha do Google Sheets
+function inicializarBanners() {
+    fetch(`${URL_PLANILHA_ANUNCIOS}?acao=puxar_banners`)
+    .then(res => res.json())
+    .then(dados => {
+        if (dados && dados.length > 0) {
+            listaAnunciantes = dados;
+        }
+        // Inicia o loop de rotação a cada 6 segundos
+        rodarCarrosselBanners();
+        setInterval(rodarCarrosselBanners, 6000);
+    })
+    .catch(() => {
+        // Se der erro, roda a lista padrão sem travar o site
+        rodarCarrosselBanners();
+        setInterval(rodarCarrosselBanners, 6000);
+    });
+}
+
+// Altera as fotos e os links do topo e rodapé de forma rotativa
+function rodarCarrosselBanners() {
+    if (listaAnunciantes.length === 0) return;
+
+    const bTopo = document.getElementById("bannerTopo");
+    const bRodape = document.getElementById("bannerRodape");
+
+    if (bTopo) {
+        const item = listaAnunciantes[indiceBannerTopo];
+        bTopo.innerHTML = `<img src="${item.img}" alt="${item.nome}" onclick="window.open('${item.link}', '_blank')">`;
+        indiceBannerTopo = (indiceBannerTopo + 1) % listaAnunciantes.length;
+    }
+
+    if (bRodape) {
+        // O rodapé pega a lista de trás para frente para não exibir o mesmo anúncio ao mesmo tempo
+        const item = listaAnunciantes[listaAnunciantes.length - 1 - indiceBannerRodape];
+        bRodape.innerHTML = `<img src="${item.img}" alt="${item.nome}" onclick="window.open('${item.link}', '_blank')">`;
+        indiceBannerRodape = (indiceBannerRodape + 1) % listaAnunciantes.length;
+    }
+}
+
+// Abre a janela oculta do "Anuncie Aqui"
+function abrirPainelAnunciante(evento) {
+    evento.preventDefault();
+    document.getElementById("painelAnunciante").style.display = "flex";
+}
+
+function fecharPainelAnunciante() {
+    document.getElementById("painelAnunciante").style.display = "none";
+}
+
+// Redireciona o lojista para o seu link do Mercado Pago de R$ 29,90
+function processarPagamentoAnuncio() {
+    const nomeEmpresa = document.getElementById("anuncNome").value.trim();
+    const linkDestino = document.getElementById("anuncLink").value.trim();
+    const imgBanner = document.getElementById("anuncImg").value.trim();
+
+    if (!nomeEmpresa || !linkDestino || !imgBanner) {
+        alert("Por favor, preencha todos os campos do seu comércio antes do pagamento!");
+        return;
+    }
+
+    // Grava temporariamente os dados digitados na memória do navegador dele
+    const dadosTemp = { nome: nomeEmpresa, link: linkDestino, img: imgBanner };
+    localStorage.setItem('anjo_cosmico_temp_anuncio', JSON.stringify(dadosTemp));
+
+    // Abre o link do Mercado Pago gerado em consenso
+    window.open("https://mpago.la", "_blank");
+
+    // Revela o campo secreto para ele ativar após concluir o pagamento
+    document.getElementById("blocoAtivacao").style.display = "block";
+}
+
+// Ativação 100% Robótica com código na Planilha
+function ativarBannerAutomatico() {
+    const codigoDigitado = document.getElementById("codigoAtivacaoInput").value.trim();
+    const dadosAnuncio = JSON.parse(localStorage.getItem('anjo_cosmico_temp_anuncio'));
+
+    if (!codigoDigitado) {
+        alert("Insira o código gerado pelo Mercado Pago para ativar!");
+        return;
+    }
+
+    if (!dadosAnuncio) {
+        alert("Dados do anúncio não encontrados. Refaça o formulário.");
+        return;
+    }
+
+    // Envia o pacote completo para a planilha computar e validar o dinheiro recebido
+    fetch(URL_PLANILHA_ANUNCIOS, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            acao: "ativar_banner_sads",
+            codigo: codigoDigitado,
+            nome: dadosAnuncio.nome,
+            link: dadosAnuncio.link,
+            img: dadosAnuncio.img,
+            valorPago: "29.90", // Registra o financeiro automaticamente na coluna
+            periodo: "3 Meses"
+        })
+    })
+    .then(() => {
+        alert("✨ Conexão Concluída! Seu anúncio está ATIVO e rodando no Portal Anjo Cósmico!");
+        fecharPainelAnunciante();
+        location.reload();
+    })
+    .catch(() => alert("Erro ao ativar. Verifique sua conexão."));
+}
